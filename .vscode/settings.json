@@ -1,0 +1,7 @@
+{
+    "python.pythonPath": "/Users/guiwoopark/.local/share/virtualenvs/review_web-XD6MYf8Y/bin/python",
+    "python.linting.flake8Enabled": true,
+    "python.linting.enabled": true,
+    "python.formatting.provider": "black",
+    "python.linting.flake8Args": ["--max-line-length=91"]
+}
