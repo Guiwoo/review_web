@@ -3,20 +3,6 @@ from django.contrib.auth.admin import UserAdmin
 from . import models
 
 
-@admin.register(models.Genre)
-class GenreAdmin(admin.ModelAdmin):
-    """Genre Admin"""
-
-    pass
-
-
-@admin.register(models.Category)
-class CategoryAdmin(admin.ModelAdmin):
-    """Category Admin"""
-
-    pass
-
-
 @admin.register(models.User)
 class CoustomUserAdmin(UserAdmin):
     """CoustomUserAdmin Definition"""
@@ -33,9 +19,14 @@ class CoustomUserAdmin(UserAdmin):
     )
     list_display = (
         "username",
+        "first_name",
+        "last_name",
+        "email",
         "bio",
         "preferenece",
         "language",
+        "favouriteBookGenre",
+        "favouriteMovieGenre",
     )
     list_filter = (
         "preferenece",

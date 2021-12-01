@@ -39,6 +39,13 @@ BASE_APP = [
 ]
 PROJECT_APP = [
     "users.apps.UsersConfig",
+    "categories.apps.CategoriesConfig",
+    "core.apps.CoreConfig",
+    "books.apps.BooksConfig",
+    "reviews.apps.ReviewsConfig",
+    "people.apps.PeopleConfig",
+    "movies.apps.MoviesConfig",
+    "favs.apps.FavsConfig",
 ]
 
 INSTALLED_APPS = BASE_APP + PROJECT_APP
