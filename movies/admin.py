@@ -10,5 +10,5 @@ class MovieAdmin(admin.ModelAdmin):
         "title",
         "year",
         "rating",
-        "director",
     )
+    list_filter = ("year", "rating")

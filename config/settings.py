@@ -37,6 +37,9 @@ BASE_APP = [
     "django.contrib.messages",
     "django.contrib.staticfiles",
 ]
+
+THIRD_PARTY_APPS = ["django_seed"]
+
 PROJECT_APP = [
     "users.apps.UsersConfig",
     "categories.apps.CategoriesConfig",
@@ -48,7 +51,7 @@ PROJECT_APP = [
     "favs.apps.FavsConfig",
 ]
 
-INSTALLED_APPS = BASE_APP + PROJECT_APP
+INSTALLED_APPS = BASE_APP + PROJECT_APP + THIRD_PARTY_APPS
 
 MIDDLEWARE = [
     "django.middleware.security.SecurityMiddleware",

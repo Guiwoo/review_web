@@ -9,18 +9,13 @@ class Review(core_model.TimeStampModel):
         "users.User", on_delete=models.CASCADE, related_name="reviews"
     )
     text = models.TextField()
-    book = models.ForeignKey(
-        "books.Book",
-        related_name="reviews",
-        on_delete=models.CASCADE,
-        blank=True,
-        null=True,
-    )
     movie = models.ForeignKey(
-        "movies.Movie",
-        related_name="reviews",
-        on_delete=models.CASCADE,
-        blank=True,
-        null=True,
+        "movies.Movie", on_delete=models.CASCADE, related_name="reviews"
     )
-    rating = models.FloatField(help_text="Max Score is 10", default=5.0)
+    book = models.ForeignKey(
+        "books.Book", on_delete=models.CASCADE, related_name="reviews"
+    )
+    rating = models.IntegerField()
+
+    def __str__(self):
+        return self.text

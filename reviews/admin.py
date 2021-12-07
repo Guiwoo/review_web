@@ -6,10 +6,5 @@ from . import models
 class ReviewAdmin(admin.ModelAdmin):
     """ReviewAdmin Definition"""
 
-    list_display = (
-        "created_by",
-        "text",
-        "book",
-        "movie",
-        "rating",
-    )
+    list_display = ("created_by", "movie", "book", "rating")
+    list_filter = ("movie", "book")

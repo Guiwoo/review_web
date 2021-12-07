@@ -4,6 +4,6 @@ from . import models
 
 @admin.register(models.Person)
 class PersonAdmin(admin.ModelAdmin):
-    """Person Admin Definition"""
 
-    pass
+    list_display = ("name", "kind")
+    list_filter = ("kind",)

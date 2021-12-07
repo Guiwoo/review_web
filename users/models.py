@@ -1,44 +1,34 @@
-from django.contrib.auth.models import AbstractUser
 from django.db import models
+from django.contrib.auth.models import AbstractUser
 
 
 class User(AbstractUser):
-    """User Definition"""
 
-    # Preference
-    PREF_BOOK = "book"
-    PREF_MOVIE = "movie"
-    PREF_BOTH = "both"
-    PREF_CHOICES = (
-        (PREF_BOOK, "Book"),
-        (PREF_MOVIE, "Movie"),
-        (PREF_BOTH, "Both"),
-    )
-    # Language
-    LANG_EN = "en"
-    LANG_KR = "kr"
-    LANG_ALL = "all"
-    LANG_CHOICES = (
-        (LANG_EN, "English"),
-        (LANG_KR, "Korean"),
-        (LANG_ALL, "All"),
-    )
-    bio = models.TextField(default="")
+    PREF_BOOKS = "books"
+    PREF_MOVIES = "movies"
+    PREF_CHOICES = ((PREF_BOOKS, "Books"), (PREF_MOVIES, "Movies"))
 
-    # GENRE
-    preferenece = models.CharField(choices=PREF_CHOICES, max_length=5, blank=True)
-    language = models.CharField(choices=LANG_CHOICES, max_length=7, blank=True)
-    favouriteBookGenre = models.ForeignKey(
-        "categories.Category",
-        related_name="userCategoryBook",
-        on_delete=models.CASCADE,
-        blank=True,
-        null=True,
+    LANG_EN = "english"
+    LANG_KR = "korean"
+    LANG_CHOICES = ((LANG_EN, "English"), (LANG_KR, "Korean"))
+
+    bio = models.TextField()
+    preference = models.CharField(
+        max_length=20, choices=PREF_CHOICES, default=PREF_MOVIES
     )
-    favouriteMovieGenre = models.ForeignKey(
+    language = models.CharField(max_length=20, choices=LANG_CHOICES, default=LANG_EN)
+    fav_book_cat = models.ForeignKey(
         "categories.Category",
-        related_name="userCategoryMovie",
-        on_delete=models.CASCADE,
-        blank=True,
+        on_delete=models.SET_NULL,
         null=True,
+        related_name="book_users",
     )
+    fav_movie_cat = models.ForeignKey(
+        "categories.Category",
+        on_delete=models.SET_NULL,
+        null=True,
+        related_name="movie_users",
+    )
+
+    def __str__(self):
+        return self.username

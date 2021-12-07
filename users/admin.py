@@ -1,36 +1,40 @@
 from django.contrib import admin
 from django.contrib.auth.admin import UserAdmin
-from . import models
+from users.models import User
 
 
-@admin.register(models.User)
-class CoustomUserAdmin(UserAdmin):
-    """CoustomUserAdmin Definition"""
+@admin.register(User)
+class UserAdmin(UserAdmin):
 
     fieldsets = UserAdmin.fieldsets + (
         (
-            "Profile",
-            {"fields": ("bio", "language")},
-        ),
-        (
-            "Preference",
-            {"fields": ("preferenece", "favouriteBookGenre", "favouriteMovieGenre")},
+            "Custom Profile",
+            {
+                "fields": (
+                    "bio",
+                    "preference",
+                    "language",
+                    "fav_book_cat",
+                    "fav_movie_cat",
+                )
+            },
         ),
     )
+
     list_display = (
         "username",
         "first_name",
         "last_name",
         "email",
-        "bio",
-        "preferenece",
+        "preference",
         "language",
-        "favouriteBookGenre",
-        "favouriteMovieGenre",
+        "fav_book_cat",
+        "fav_movie_cat",
     )
+
     list_filter = (
-        "preferenece",
+        "preference",
         "language",
-        "favouriteBookGenre",
-        "favouriteMovieGenre",
+        "fav_book_cat",
+        "fav_movie_cat",
     )

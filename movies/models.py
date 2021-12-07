@@ -16,11 +16,15 @@ class Movie(core_models.TimeStampModel):
     )
     cover_image = models.ImageField()
     rating = models.IntegerField(help_text="Max Score is 10", default=5.0)
-    category = models.ManyToManyField("categories.Category", related_name="movies")
+    category = models.ManyToManyField(
+        "categories.Category", related_name="movies", blank=True
+    )
     director = models.ForeignKey(
         "people.Person", related_name="peopleDirector", on_delete=models.CASCADE
     )
-    cast = models.ManyToManyField("people.Person", related_name="poepleCast")
+    cast = models.ManyToManyField(
+        "people.Person", related_name="poepleCast", blank=True
+    )
 
     def __str__(self):
         return self.title
