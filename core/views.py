@@ -1,3 +1,17 @@
 from django.shortcuts import render
+from movies.models import Movie
+from books.models import Book
+from people.models import Person
 
-# Create your views here.
+
+def resolve_home(request):
+
+    movies = Movie.objects.all().order_by("pk")[:10]
+    books = Book.objects.all().order_by("pk")[:10]
+    people = Person.objects.all().order_by("pk")[:10]
+
+    return render(
+        request,
+        "home.html",
+        {"movies": movies, "books": books, "people": people, "page_title": "Home"},
+    )

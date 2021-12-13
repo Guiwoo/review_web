@@ -25,9 +25,9 @@ class Command(BaseCommand):
     def handle(self, *args, **options):
         num = options.get("number")
         seeder = Seed.seeder()
-        directorEx = Person.objects.filter(kind="director")
+        directorEx = Person.objects.filter(kind=Person.KIND_DIRECTOR)
         movieEx = Category.objects.filter(kind="movie")
-        castEx = Person.objects.filter(kind="actor")
+        castEx = Person.objects.filter(kind=Person.KIND_ACTOR)
         seeder.add_entity(
             Movie,
             num,
@@ -35,6 +35,7 @@ class Command(BaseCommand):
                 "title": lambda x: seeder.faker.company(),
                 "year": lambda x: random.randint(1900, datetime.date.today().year),
                 "rating": lambda x: random.randint(0, 10),
+                "category": lambda x: random.choice(movieEx),
                 "director": lambda x: random.choice(directorEx),
             },
         )
@@ -46,8 +47,4 @@ class Command(BaseCommand):
                 magic = random.randint(0, 11)
                 if magic % 2 == 0:
                     movie_model.cast.add(c)
-            for m in movieEx:
-                magic = random.randint(0, 11)
-                if magic % 2 == 0:
-                    movie_model.category.add(m)
         self.stdout.write(self.style.SUCCESS(f"{num} {self.Avariable}s are created!🌈"))

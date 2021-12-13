@@ -1,0 +1,25 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div>
+  <h2>People</h2>
+  {% for person in people %}
+  <div>
+    <a href="{% url "people:peopleDetail" person.pk %}"><h3>{{person.name}}</h3></a>
+    <h5>{{person.kind}}</h5>
+  </div>
+  {% endfor %}
+<hr />
+</div>
+<div>
+  {% if page_obj.has_previous %}
+        <a href="?page={{page_obj.previous_page_number}}">Previous</a>
+    {% endif %}
+
+    Page {{page_obj.number}} of {{page_obj.paginator.num_pages}}
+
+    {% if page_obj.has_next  %}
+        <a href="?page={{page_obj.next_page_number}}">Next</a>
+    {% endif %}
+</div>
+{% endblock content %}

@@ -7,7 +7,7 @@ import random
 
 class Command(BaseCommand):
 
-    Avariable = "Book"
+    Avariable = "User"
 
     help = f"This command Create {Avariable}"
 

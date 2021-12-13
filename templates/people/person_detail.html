@@ -1,0 +1,13 @@
+{% extends "base.html" %}
+
+{% block page_title%}Detail{% endblock %}
+
+{% block content%}
+<h2>💃🏻 {{person.name}}!!</h2>
+<ul>
+  <li>{{person.kind}}</li>
+</ul>
+<a href="{% url "people:personUpdate" person.pk %}">
+  <h4>Update Person</h4>
+</a>
+{% endblock %}

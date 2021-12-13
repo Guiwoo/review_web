@@ -31,10 +31,10 @@ class Command(BaseCommand):
             Review,
             num,
             {
-                "created_by": random.choice(userEx),
-                "movie": random.choice(movieEx),
-                "book": random.choice(bookEx),
-                "rating": random.randint(0, 10),
+                "created_by": lambda x: random.choice(userEx),
+                "movie": lambda x: random.choice(movieEx),
+                "book": lambda x: random.choice(bookEx),
+                "rating": lambda x: random.randint(0, 10),
             },
         )
         seeder.execute()

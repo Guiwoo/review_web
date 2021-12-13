@@ -1,0 +1,16 @@
+{% extends "base.html" %}
+
+{% block page_title%}Detail{% endblock %}
+
+{% block content%}
+<h2>📚 {{book.title}}!!</h2>
+<ul>
+  <li>{{book.year}}</li>
+  <li>{{book.rating}}</li>
+  <li>{{book.category}}</li>
+  <li>{{book.writer}}</li>
+</ul>
+<a href="{% url "books:bookUpdate" book.pk %}">
+  <h4>Update Book</h4>
+</a>
+{% endblock %}

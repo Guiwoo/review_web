@@ -1,0 +1,39 @@
+{% extends "base.html"%}
+{% block content %}
+<h2>Update {{book.title}}</h2>
+<form>
+<fieldset>
+<legend>Update</legend>
+<div>
+  <label for="title">Title</label>
+  <input type="text" placeholder="{{book.title}}"/>
+</div>
+<hr/>
+<div>
+  <label for="year">Year</label>
+  <input type="text" placeholder="{{book.year}}"/>
+</div>
+<hr/>
+<div>
+  <label for="cover_image">Cover_image</label>
+  <input type="file" placeholder="{{book.cover_image}}"/>
+</div>
+<hr/>
+<div>
+  <label for="rating">Rating</label>
+  <input type="text" placeholder="{{book.rating}}"/>
+</div>
+<hr/>
+<div>
+  <label for="category">Category</label>
+  <input type="text" placeholder="{{book.category}}"/>
+</div>
+<hr/>
+<div>
+  <label for="writer">Writer</label>
+  <input type="text" placeholder="{{book.writer}}"/>
+</div>
+<button>Update!</button>
+</fieldset>
+</form>
+{% endblock %}

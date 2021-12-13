@@ -1,0 +1,27 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div>
+  <h2>Movies</h2>
+  {% for movie in movies %}
+  <div>
+    <a href="{% url "movies:movieDetail" movie.pk %}">
+      <h3>{{movie.title}}</h3>
+    </a>
+    <h5>{{movie.year}}</h5>
+  </div>
+  {% endfor %}
+<hr />
+</div>
+<div>
+  {% if page_obj.has_previous %}
+        <a href="?page={{page_obj.previous_page_number}}">Previous</a>
+    {% endif %}
+
+    Page {{page_obj.number}} of {{page_obj.paginator.num_pages}}
+
+    {% if page_obj.has_next  %}
+        <a href="?page={{page_obj.next_page_number}}">Next</a>
+    {% endif %}
+</div>
+{% endblock content %}

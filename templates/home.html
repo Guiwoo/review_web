@@ -1,0 +1,50 @@
+{% extends "base.html" %}
+
+{% block content %}
+<hr/>
+<nav>
+  <ul>
+    <a href="{% url "movies:movieCreate"%}"><li>Upload Movie</li></a>
+    <a href="#"><li>Upload Book</li></a>
+    <a href="#"><li>Upload Perosn</li></a>
+  </ul>
+</nav>
+<hr/>
+<div>
+  <h2>Movies</h2>
+  {% for movie in movies %}
+  <div>
+      <a href="{% url 'movies:movieDetail' movie.pk %}"><h3>{{movie.title}}</h3></a>
+    <h5>{{movie.year}}</h5>
+  </div>
+  {% endfor %}
+  <a href="{% url 'movies:movies' %}">See all movies &rarr;</a>
+<hr />
+</div>
+
+
+
+<div>
+  <h2>Books</h2>
+  {% for book in books %}
+  <div>
+    <a href="{% url 'books:bookDeatil' book.pk %}"><h3>{{book.title}}</h3></a>
+    <h5>{{book.year}}</h5>
+  </div>
+  {% endfor %}
+  <a href="{% url 'books:books' %}">See all books &rarr;</a>
+<hr />
+</div>
+
+<div>
+  <h2>People</h2>
+  {% for person in people %}
+  <div>
+    <a href="{% url "people:peopleDetail" person.pk%}"><h3>{{person.name}}</h3></a>
+    <h5>{{person.kind}}</h5>
+  </div>
+  {% endfor %}
+  <a href="{% url 'people:people' %}">See all people &rarr;</a>
+<hr />
+<div>
+{% endblock content %}
