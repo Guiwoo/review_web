@@ -1,5 +1,8 @@
 from django.views.generic import ListView, DetailView, UpdateView, CreateView
+from django.shortcuts import redirect, reverse
 from movies.models import Movie
+from movies.form import CreateMovieForm
+from django.contrib import messages
 
 
 class MoviesView(ListView):
@@ -37,15 +40,11 @@ class MovieUpdate(UpdateView):
 
 
 class MovieCreate(CreateView):
-    model = Movie
-    template_name = "movies/movie_create.html"
-    context_object_name = "movie"
-    fields = (
-        "title",
-        "year",
-        "cover_image",
-        "rating",
-        "category",
-        "director",
-        "cast",
-    )
+    form_class = CreateMovieForm
+    template_name = "movies/movie_update.html"
+
+    def form_valid(self, form):
+        movie = form.save()
+        movie.save()
+        messages.success(self.request, "Created !")
+        return redirect(reverse("movies:movieDetail", kwargs={"pk": movie.pk}))

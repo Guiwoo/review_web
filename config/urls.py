@@ -6,6 +6,6 @@ urlpatterns = [
     path("movies/", include("movies.urls", namespace="movies")),
     path("books/", include("books.urls", namespace="books")),
     path("genres", include("categories.urls", namespace="genres")),
-    path("people", include("people.urls", namespace="people/")),
+    path("people/", include("people.urls", namespace="people/")),
     path("admin/", admin.site.urls),
 ]

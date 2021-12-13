@@ -1,44 +1,11 @@
 {% extends "base.html" %}
 {% block content %}
-<h2>Update {{movie.title}}</h2>
-<form>
-<fieldset>
-<legend>Update</legend>
-<div>
-  <label for="title">Title</label>
-  <input type="text" placeholder="{{movie.title}}"/>
-</div>
-<hr/>
-<div>
-  <label for="year">Year</label>
-  <input type="text" placeholder="{{movie.year}}"/>
-</div>
-<hr/>
-<div>
-  <label for="cover_image">Cover_image</label>
-  <input type="file" placeholder="{{movie.cover_image}}"/>
-</div>
-<hr/>
-<div>
-  <label for="rating">Rating</label>
-  <input type="text" placeholder="{{movie.rating}}"/>
-</div>
-<hr/>
-<div>
-  <label for="category">Category</label>
-  <input type="text" placeholder="{{movie.category}}"/>
-</div>
-<hr/>
-<div>
-  <label for="director">Director</label>
-  <input type="text" placeholder="{{movie.director}}"/>
-</div>
-<hr/>
-<div>
-  <label for="cast">Cast</label>
-  <input type="text" placeholder="{{movie.cast}}"/>
-</div>
-<button>Update!</button>
-</fieldset>
+<form method="POST">
+  <fieldset>
+    <legend>Update Movie🚀</legend>
+    {% csrf_token %}
+    {{ form.as_p}}
+    <input type="submit" name="submit" value="Update!">
+  </fieldset>
 </form>
 {% endblock %}
