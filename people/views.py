@@ -1,5 +1,9 @@
-from django.views.generic import ListView, DetailView, UpdateView
+from django.urls.base import reverse
+from django.views.generic import ListView, DetailView, UpdateView, CreateView
+from django.shortcuts import redirect
+from django.contrib import messages
 from people.models import Person
+from people.form import CreatePersonForm
 
 
 class PeopleView(ListView):
@@ -7,7 +11,7 @@ class PeopleView(ListView):
     model = Person
     paginate_by = 10
     paginate_orphans = 5
-    ordering = "created_at"
+    ordering = "pk"
     context_object_name = "people"
     template_name = "people/people_list.html"
 
@@ -31,3 +35,15 @@ class PersonUpdate(UpdateView):
         "photo",
         "kind",
     )
+
+
+class PersonCreate(CreateView):
+    form_class = CreatePersonForm
+    template_name = "people/person_create.html"
+    context_object_name = "person"
+
+    def form_valid(self, form):
+        person = form.save()
+        person.save()
+        messages.success(self.request, "Created !")
+        return redirect(reverse("people:peopleDetail", kwargs={"pk": person.pk}))

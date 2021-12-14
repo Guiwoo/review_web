@@ -13,7 +13,7 @@ class Book(core_models.TimeStampModel):
 
     title = models.CharField(max_length=120)
     year = models.IntegerField()
-    cover_image = models.ImageField()
+    cover_image = models.ImageField(null=True, blank=True)
     rating = models.FloatField()
     category = models.ForeignKey(
         "categories.Category", on_delete=models.CASCADE, related_name="books"
@@ -26,4 +26,4 @@ class Book(core_models.TimeStampModel):
         return self.title
 
     def get_absolute_url(self):
-        return reverse("books:bookDetail", kwargs={"pk": self.pk})
+        return reverse("books:bookDeatil", kwargs={"pk": self.pk})

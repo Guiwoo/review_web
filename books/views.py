@@ -1,5 +1,8 @@
-from django.views.generic import ListView, DetailView, UpdateView
+from django.views.generic import ListView, DetailView, UpdateView, CreateView
+from django.shortcuts import redirect, reverse
 from books.models import Book
+from books.form import CreateBookForm
+from django.contrib import messages
 
 
 class BooksView(ListView):
@@ -7,7 +10,7 @@ class BooksView(ListView):
     model = Book
     paginate_by = 10
     paginate_orphans = 5
-    ordering = "created_at"
+    ordering = "pk"
     context_object_name = "books"
 
     def get_context_data(self, **kwargs):
@@ -33,3 +36,15 @@ class BookUpdate(UpdateView):
         "category",
         "writer",
     )
+
+
+class BookCreate(CreateView):
+    form_class = CreateBookForm
+    template_name = "books/book_create.html"
+    context_object_name = "book"
+
+    def form_valid(self, form):
+        book = form.save()
+        book.save()
+        messages.success(self.request, "Created !")
+        return redirect(reverse("books:bookDetail", kwargs={"pk": book.pk}))

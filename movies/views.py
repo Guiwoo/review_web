@@ -10,7 +10,7 @@ class MoviesView(ListView):
     model = Movie
     paginate_by = 10
     paginate_orphans = 5
-    ordering = "created_at"
+    ordering = "pk"
     context_object_name = "movies"
 
     def get_context_data(self, **kwargs):
@@ -41,10 +41,11 @@ class MovieUpdate(UpdateView):
 
 class MovieCreate(CreateView):
     form_class = CreateMovieForm
-    template_name = "movies/movie_update.html"
+    template_name = "movies/movie_create.html"
 
     def form_valid(self, form):
         movie = form.save()
         movie.save()
+        form.save_m2m()
         messages.success(self.request, "Created !")
         return redirect(reverse("movies:movieDetail", kwargs={"pk": movie.pk}))

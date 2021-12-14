@@ -1,4 +1,5 @@
 from django import forms
+from django.db.models import Q
 from . import models
 
 
@@ -14,6 +15,16 @@ class CreateMovieForm(forms.ModelForm):
             "director",
             "cast",
         )
+
+    def __init__(self, *args, **kwargs):
+        super(CreateMovieForm, self).__init__(*args, **kwargs)
+        self.fields["category"].queryset = self.fields["category"].queryset.filter(
+            Q(kind="movie") | Q(kind="both")
+        )
+        self.fields["director"].queryset = self.fields["director"].queryset.filter(
+            kind="director"
+        )
+        self.fields["cast"].queryset = self.fields["cast"].queryset.filter(kind="actor")
 
     def save(self, *args, **kwargs):
         movie = super().save(commit=False)

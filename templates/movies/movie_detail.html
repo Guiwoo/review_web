@@ -6,7 +6,9 @@
 <h2>🍿{{movie.title}}!!</h2>
 <ul>
   <li>{{movie.director}}</li>
-  <li>{{movie.cast}}</li>
+  <li>{% for cast in movie.cast.all %}
+    <p>💃🏻  {{cast.name}}</p>
+  {% endfor %}</li>
   <li>{{movie.year}}</li>
   <li>{{movie.category}}</li>
 </ul>
