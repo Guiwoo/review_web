@@ -12,7 +12,7 @@ class User(AbstractUser):
     LANG_KR = "korean"
     LANG_CHOICES = ((LANG_EN, "English"), (LANG_KR, "Korean"))
 
-    bio = models.TextField()
+    bio = models.TextField(default="Please write on your Bio Here")
     preference = models.CharField(
         max_length=20, choices=PREF_CHOICES, default=PREF_MOVIES
     )

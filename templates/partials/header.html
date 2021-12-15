@@ -1,0 +1,21 @@
+<header>
+    <nav>
+        <a href="{% url "core:home" %}">
+            <h2>Home</h2>
+        </a>
+        <ul>
+            {% if user.is_authenticated %}
+            <a href="{% url "users:logout" %}">
+                <li>Log-Out</li>
+            </a>
+            {% else %}
+            <a href="{% url "users:login" %}">
+                <li>Log-In</li>
+            </a>
+            <a href="{% url "users:signin" %}">
+                <li>Sign-In</li>
+            </a>
+            {% endif%}
+        </ul>
+    </nav>
+</header>
