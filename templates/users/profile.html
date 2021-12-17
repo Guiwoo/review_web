@@ -1,0 +1,29 @@
+{% extends "base.html" %}
+
+{% block page_title%}{{user_obj.first_name}}'s Profile{% endblock %}
+
+{% block content%}
+<h2>{{user_obj.first_name}}'s Profile</h2>
+<pre>
+  \ ^__^
+   \(oo)\_______
+    (__)\       )\/\
+        ||----w |   \
+        ||     ||
+</pre>
+{% if user_obj == user %}
+<a href="{% url "users:updateProfile" %}">Edit Profile</a>
+{% endif %}
+<ul>
+    <li>Name: <strong>{{user_obj.first_name}} {{user_obj.last_name}}</strong></li>
+    <li>Email: <strong>{{user_obj.email}}</strong></li>
+    <li>Bio: <strong>{{user_obj.bio}}</strong></li>
+    <li>Preference: <strong>{{user_obj.preference.capitalize}}</strong></li>
+    <li>Language: <strong>{{user_obj.language.capitalize}}</strong></li>
+    <li>Favorite Genre</li>
+    <ul>
+        <li><strong>Book : {{user_obj.fav_book_cat}}</strong></li>
+        <li><strong>Movie : {{user_obj.fav_movie_cat}}</strong></li>
+    </ul>
+</ul>
+{% endblock %}

@@ -1,6 +1,8 @@
 from django import forms
 from . import models
 from categories.models import Category
+from django.db.models import Q
+from django.contrib.auth.forms import PasswordChangeForm
 
 
 class LoginForm(forms.Form):
@@ -51,3 +53,50 @@ class SignInForm(forms.ModelForm):
         user.fav_movie_cat = Category.objects.get(pk=1)
         user.set_password(password)
         user.save()
+
+
+class ChangePasswordForm(PasswordChangeForm):
+    old_password = forms.CharField(
+        label=("옛날 비밀번호"),
+        strip=False,
+        widget=forms.PasswordInput(attrs={"autofocus": True}),
+    )
+
+    new_password1 = forms.CharField(
+        label=("새 비밀번호"),
+        strip=False,
+        widget=forms.PasswordInput(attrs={"autofocus": True}),
+    )
+    new_password2 = forms.CharField(
+        label=("새 비밀번호 확인"),
+        strip=False,
+        widget=forms.PasswordInput(attrs={"autofocus": True}),
+    )
+    field_order = ["old_password", "new_password1", "new_password2"]
+
+
+class UpdateProfileForm(forms.ModelForm):
+    class Meta:
+        model = models.User
+        fields = (
+            "first_name",
+            "last_name",
+            "bio",
+            "preference",
+            "language",
+            "fav_book_cat",
+            "fav_movie_cat",
+        )
+
+    def __init__(self, *args, **kwargs):
+        super(UpdateProfileForm, self).__init__(*args, **kwargs)
+        self.fields["fav_book_cat"].queryset = self.fields[
+            "fav_book_cat"
+        ].queryset.filter(Q(kind="book") | Q(kind="both"))
+        self.fields["fav_movie_cat"].queryset = self.fields[
+            "fav_movie_cat"
+        ].queryset.filter(Q(kind="movie") | Q(kind="both"))
+
+    def save(self, *args, **kwargs):
+        user = super().save()
+        return user
