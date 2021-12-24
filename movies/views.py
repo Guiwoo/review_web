@@ -1,16 +1,13 @@
-from django.views.generic import ListView, DetailView, UpdateView, CreateView
-from django.shortcuts import redirect, reverse
+from django.views.generic import ListView, DetailView, CreateView, UpdateView
 from movies.models import Movie
-from movies.form import CreateMovieForm
-from django.contrib import messages
 
 
 class MoviesView(ListView):
 
     model = Movie
-    paginate_by = 10
+    paginate_by = 15
     paginate_orphans = 5
-    ordering = "pk"
+    ordering = "-created_at"
     context_object_name = "movies"
 
     def get_context_data(self, **kwargs):
@@ -24,10 +21,8 @@ class MovieDetail(DetailView):
     context_object_name = "movie"
 
 
-class MovieUpdate(UpdateView):
+class CreateMovie(CreateView):
     model = Movie
-    template_name = "movies/movie_update.html"
-    context_object_name = "movie"
     fields = (
         "title",
         "year",
@@ -39,13 +34,14 @@ class MovieUpdate(UpdateView):
     )
 
 
-class MovieCreate(CreateView):
-    form_class = CreateMovieForm
-    template_name = "movies/movie_create.html"
-
-    def form_valid(self, form):
-        movie = form.save()
-        movie.save()
-        form.save_m2m()
-        messages.success(self.request, "Created !")
-        return redirect(reverse("movies:movieDetail", kwargs={"pk": movie.pk}))
+class UpdateMovie(UpdateView):
+    model = Movie
+    fields = (
+        "title",
+        "year",
+        "cover_image",
+        "rating",
+        "category",
+        "director",
+        "cast",
+    )

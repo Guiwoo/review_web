@@ -1,25 +1,31 @@
+from random import choice, randint
 from django.core.management.base import BaseCommand
-from people.models import Person
 from django_seed import Seed
+from people.models import Person
 
 
 class Command(BaseCommand):
 
-    Avariable = "People"
-
-    help = f"This command Create {Avariable}"
+    help = "This command seeds people"
 
     def add_arguments(self, parser):
         parser.add_argument(
-            "--number",
-            default=2,
-            type=int,
-            help="How many argument you want to created",
+            "--total", help="How many people do you want to create?", default=10
         )
 
     def handle(self, *args, **options):
-        num = options.get("number")
+        total = int(options.get("total"))
         seeder = Seed.seeder()
-        seeder.add_entity(Person, num, {"name": lambda x: seeder.faker.name()})
+        seeder.add_entity(
+            Person,
+            total,
+            {
+                "name": lambda x: seeder.faker.name(),
+                "photo": lambda x: f"people/{randint(1,40)}.jpg",
+                "kind": lambda x: choice(
+                    [Person.KIND_ACTOR, Person.KIND_DIRECTOR, Person.KIND_WRITER]
+                ),
+            },
+        )
         seeder.execute()
-        self.stdout.write(self.style.SUCCESS(f"{num} {self.Avariable}s are created!🌈"))
+        self.stdout.write(self.style.SUCCESS(f"{total} people created!"))

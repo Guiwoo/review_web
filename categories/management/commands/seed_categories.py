@@ -1,41 +1,64 @@
 from django.core.management.base import BaseCommand
-from categories import models as category_modles
+from categories.models import Category
 
 
 class Command(BaseCommand):
 
-    Avariable = "Categories"
+    help = "This command seeds categories"
 
-    help = f"This command Create {Avariable}"
-
-    # def add_arguments(self, parser):
-    #     parser.add_argument(
-    #         "--number", default=1, help="How many argument you want to created"
-    #     )
+    both_genres = [
+        "Adventure",
+        "Fantasy",
+        "History",
+        "Horror",
+        "Mystery",
+        "Romance",
+        "Thriller",
+    ]
+    movie_genres = [
+        "Action",
+        "Animation",
+        "Biography",
+        "Comedy",
+        "Crime",
+        "Documentary",
+        "Drama",
+        "Family",
+        "Film Noir",
+        "Music",
+        "Musical",
+        "Sci-Fi",
+        "Short Film",
+        "Sport",
+        "Superhero",
+        "War",
+        "Western",
+    ]
+    book_genres = [
+        "Contemporary",
+        "Dystopian",
+        "Paranormal",
+        "Historical fiction",
+        "Science Fiction",
+        "Memoir",
+        "Cooking",
+        "Art",
+        "Self-help / Personal",
+        "Development",
+        "Motivational",
+        "Health",
+        "Travel",
+        "Guide / How-to",
+        "Families & Relationships",
+        "Humor",
+        "Children’s",
+    ]
 
     def handle(self, *args, **options):
-        Movie_Genre = [
-            "Action",
-            "Comedy",
-            "Drama",
-            "Fantasy",
-            "Horror",
-            "Mystery",
-            "Romance",
-            "Thriller",
-        ]
-        Book_Genre = [
-            "Action and Adventure",
-            "Classics",
-            "Comic Book or Graphic Novel",
-            "Detective and Mystery",
-            "Fantasy",
-            "Historical Fiction",
-            "Horror",
-        ]
-        num = options.get("number")
-        for m in Movie_Genre:
-            category_modles.Category.objects.create(name=m, kind="movie")
-        for b in Book_Genre:
-            category_modles.Category.objects.create(name=b, kind="book")
-        self.stdout.write(self.style.SUCCESS(f"{num} {self.Avariable}s are created!🌈"))
+        for genre in self.both_genres:
+            Category.objects.get_or_create(name=genre, kind=Category.KIND_BOTH)
+        for genre in self.movie_genres:
+            Category.objects.get_or_create(name=genre, kind=Category.KIND_MOVIE)
+        for genre in self.book_genres:
+            Category.objects.get_or_create(name=genre, kind=Category.KIND_BOOK)
+        self.stdout.write(self.style.SUCCESS("Categories created!"))

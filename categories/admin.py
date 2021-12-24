@@ -1,10 +1,14 @@
 from django.contrib import admin
-from . import models
+from categories.models import Category
 
+@admin.register(Category)
+class CategoryAdmin(admin.ModelAdmin):
 
-@admin.register(models.Category)
-class CategoriesAdmin(admin.ModelAdmin):
-
-    list_display = ("name", "kind")
-
-    list_filter = ("kind",)
+  list_display = (
+    "name",
+    "kind"
+  )
+  
+  list_filter = (
+    "kind",
+  )

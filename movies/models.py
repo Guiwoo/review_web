@@ -1,10 +1,9 @@
-from django.db import models
-from core.models import TimeStampModel
 from django.urls import reverse
+from django.db import models
+from core.models import CoreModel
 
 
-class Movie(TimeStampModel):
-
+class Movie(CoreModel):
     """Movie Model"""
 
     title = models.CharField(max_length=120)
@@ -23,4 +22,10 @@ class Movie(TimeStampModel):
         return self.title
 
     def get_absolute_url(self):
-        return reverse("movies:movieDetail", kwargs={"pk": self.pk})
+        return reverse("movies:movie", kwargs={"pk": self.pk})
+
+    def all_reviews(self):
+        return self.reviews.all()
+
+    class Meta:
+        ordering = ["-created_at"]

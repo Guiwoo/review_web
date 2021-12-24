@@ -1,16 +1,28 @@
 {% extends "base.html" %}
 
-{% block page_title%}Detail{% endblock %}
+{% block page_title %}
+  {{book.title}}
+{% endblock page_title %}
 
-{% block content%}
-<h2>📚 {{book.title}}!!</h2>
-<ul>
-  <li>{{book.year}}</li>
-  <li>{{book.rating}}</li>
-  <li>{{book.category}}</li>
-  <li>{{book.writer}}</li>
-</ul>
-<a href="{% url "books:bookUpdate" book.pk %}">
-  <h4>Update Book</h4>
-</a>
-{% endblock %}
+
+{% block content %}
+
+<div class="flex flex-col items-center bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4">
+<h2 class="font-bold">{{book.title}}</h2>
+<div class="flex items-center my-2">
+  <div class="inline-block bg-gray-200 rounded-full px-3 py-1 text-sm font-semibold text-gray-700">{{book.year}}</div>
+  <div class="bg-orange-400 text-white px-3 shadow-md py-1 rounded-full mx-4">{{book.category}}</div>
+  <div class="text-red-600">♥︎{{book.rating}}</div>
+</div>
+<div class="my-2">Writer:
+  <div class="inline-block bg-white shadow-md rounded-full px-3 py-1 text-sm font-semibold text-gray-700">{{book.writer}}</div>
+</div>
+<div class="flex">
+  <a class="bg-blue-400 hover:bg-blue-600 text-white font-bold mt-4 py-2 px-4 rounded" href="{% url 'books:update' book.pk %}">Edit Book</a>
+  {% if user.is_authenticated %}
+    {% include "mixins/fav_button.html" with obj=book kind='book' %}
+  {% endif %}
+</div>
+</div>
+
+{% endblock content %}

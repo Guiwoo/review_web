@@ -1,9 +1,12 @@
 from django.contrib import admin
-from . import models
+from people.models import Person
 
 
-@admin.register(models.Person)
+@admin.register(Person)
 class PersonAdmin(admin.ModelAdmin):
 
-    list_display = ("name", "kind")
-    list_filter = ("kind",)
+  list_display = (
+    "name",
+    "kind"
+  )
+  list_filter = ("kind",)

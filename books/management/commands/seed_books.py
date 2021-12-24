@@ -1,40 +1,35 @@
+from random import choice, randint
 from django.core.management.base import BaseCommand
 from django_seed import Seed
 from books.models import Book
 from categories.models import Category
 from people.models import Person
-import datetime
-import random
 
 
 class Command(BaseCommand):
 
-    Avariable = "Book"
-
-    help = f"This command Create {Avariable}"
+    help = "This command seeds books"
 
     def add_arguments(self, parser):
         parser.add_argument(
-            "--number",
-            default=2,
-            type=int,
-            help=f"How many {self.Avariable}s do you want to create?",
+            "--total", help="How many books do you want to create?", default=10
         )
 
     def handle(self, *args, **options):
-        num = options.get("number")
+        total = int(options.get("total"))
+        categories = Category.objects.all()
+        writers = Person.objects.filter(kind=Person.KIND_WRITER)
         seeder = Seed.seeder()
-        bookEx = Category.objects.filter(kind="book")
-        writerEx = Person.objects.filter(kind="writer")
         seeder.add_entity(
             Book,
-            num,
+            total,
             {
-                "rating": lambda x: random.randint(0, 10),
-                "year": lambda x: random.randint(1900, datetime.date.today().year),
-                "category": lambda x: random.choice(bookEx),
-                "writer": lambda x: random.choice(writerEx),
+                "year": lambda x: seeder.faker.year(),
+                "rating": lambda x: randint(1, 5),
+                "category": lambda x: choice(categories),
+                "cover_image": lambda x: f"book/{randint(1,17)}.webp",
+                "writer": lambda x: choice(writers),
             },
         )
         seeder.execute()
-        self.stdout.write(self.style.SUCCESS(f"{num} {self.Avariable}s are created!🌈"))
+        self.stdout.write(self.style.SUCCESS(f"{total} books created!"))

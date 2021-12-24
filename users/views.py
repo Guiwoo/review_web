@@ -1,35 +1,40 @@
-from django.views.generic import FormView, DetailView
+from django.views import View
+from django.views.generic import FormView, DetailView, UpdateView
+from django.shortcuts import render, redirect, reverse
 from django.contrib.auth.views import PasswordChangeView
 from django.urls import reverse_lazy
-from django.contrib.auth import authenticate, login, views
-from django.views.generic.edit import UpdateView
-from . import form, models
+from django.contrib.auth import authenticate, login, logout
+from users.forms import LoginForm, SignUpForm
+from users.models import User
 
 
-class LoginView(FormView):
+def logout_view(request):
+    logout(request)
+    return redirect(reverse("core:home"))
 
-    template_name = "users/login.html"
-    form_class = form.LoginForm
+
+class LoginView(View):
+    def get(self, request):
+        form = LoginForm()
+        return render(request, "users/login.html", {"form": form})
+
+    def post(self, request):
+        form = LoginForm(request.POST)
+        if form.is_valid():
+            email = form.cleaned_data.get("email")
+            password = form.cleaned_data.get("password")
+            user = authenticate(request, username=email, password=password)
+            if user is not None:
+                login(request, user)
+                return redirect(reverse("core:home"))
+        return render(request, "users/login.html", {"form": form})
+
+
+class SignUpView(FormView):
+
+    template_name = "users/signup.html"
+    form_class = SignUpForm
     success_url = reverse_lazy("core:home")
-
-    def form_valid(self, form):
-        email = form.cleaned_data.get("email")
-        password = form.cleaned_data.get("password")
-        user = authenticate(self.request, username=email, password=password)
-        if user is not None:
-            login(self.request, user)
-        return super().form_valid(form)
-
-
-class LogoutView(views.LogoutView):
-    next_page = reverse_lazy("core:home")
-
-
-class SignInView(FormView):
-    template_name = "users/signin.html"
-    form_class = form.SignInForm
-    success_url = reverse_lazy("core:home")
-    initial = {"first_name": "test", "last_name": "test", "email": "test@test.com"}
 
     def form_valid(self, form):
         form.save()
@@ -41,20 +46,30 @@ class SignInView(FormView):
         return super().form_valid(form)
 
 
-class ProfileView(DetailView):
-    model = models.User
-    template_name = "users/profile.html"
+class UserProfileView(DetailView):
+    model = User
     context_object_name = "user_obj"
 
 
 class UpdateProfileView(UpdateView):
-    form_class = form.UpdateProfileForm
-    template_name = "users/update-profile.html"
+
+    model = User
+    template_name = "users/update_profile.html"
+    fields = (
+        "first_name",
+        "last_name",
+        "bio",
+        "preference",
+        "language",
+        "fav_book_cat",
+        "fav_movie_cat",
+    )
 
     def get_object(self, queryset=None):
         return self.request.user
 
 
+
 class UpdatePasswordView(PasswordChangeView):
-    form_class = form.ChangePasswordForm
-    template_name = "users/update-password.html"
+
+    template_name = "users/update_password.html"

@@ -1,15 +1,11 @@
-import datetime
-from core import models as core_models
-from django.db import models
 from django.urls import reverse
+from django.db import models
+from core.models import CoreModel
 
 
-def CHECK_DATE():
-    return datetime.date.today().year
+class Book(CoreModel):
 
-
-class Book(core_models.TimeStampModel):
-    """Book Definition"""
+    """Book Model"""
 
     title = models.CharField(max_length=120)
     year = models.IntegerField()
@@ -26,4 +22,10 @@ class Book(core_models.TimeStampModel):
         return self.title
 
     def get_absolute_url(self):
-        return reverse("books:bookDeatil", kwargs={"pk": self.pk})
+        return reverse("books:book", kwargs={"pk": self.pk})
+
+    def all_reviews(self):
+        return self.reviews.all()
+
+    class Meta:
+        ordering = ["-created_at"]

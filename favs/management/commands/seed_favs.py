@@ -1,32 +1,29 @@
 import random
 from django.core.management.base import BaseCommand
-from favs.models import Fav
+from favs.models import FavList
 from users.models import User
-from books.models import Book
 from movies.models import Movie
+from books.models import Book
 
 
 class Command(BaseCommand):
 
-    Avariable = "Favs"
-
-    help = f"This command Create {Avariable}"
+    help = "This command seeds lists"
 
     def add_arguments(self, parser):
         parser.add_argument(
-            "--number",
-            default=2,
-            type=int,
-            help=f"How many {self.Avariable}s do you want to create?",
+            "--total", help="How many lists do you want to create?", default=10
         )
 
     def handle(self, *args, **options):
-        num = options.get("number")
-        userEx = User.objects.all()
-        movieEx = Movie.objects.all()
-        bookEx = Book.objects.all()
-        for user in userEx:
-            fav_list = Fav.objects.create(created_by=user)
-            fav_list.movies.set(random.choices(movieEx))
-            fav_list.books.set(random.choices(bookEx))
-        self.stdout.write(self.style.SUCCESS(f"{num} {self.Avariable}s are created!🌈"))
+        total = int(options.get("total"))
+        users = User.objects.all()[:total]
+        movies = Movie.objects.all()
+        books = Book.objects.all()
+        for user in users:
+            fav_list = FavList.objects.create(
+                created_by=user,
+            )
+            fav_list.movies.set(random.choices(movies))
+            fav_list.books.set(random.choices(books))
+        self.stdout.write(self.style.SUCCESS(f"{total} lists created!"))

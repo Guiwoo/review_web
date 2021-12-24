@@ -1,24 +1,29 @@
-<header>
-    <nav>
-        <a href="{% url "core:home" %}">
-            <h2>Home</h2>
-        </a>
-        <ul>
-            {% if user.is_authenticated %}
-            <a href="{% url "users:logout" %}">
-                <li>Log-Out</li>
-            </a>
-            <a href="{{user.get_absolute_url}}">
-                <li>Profile</li>
-            </a>
-            {% else %}
-            <a href="{% url "users:login" %}">
-                <li>Log-In</li>
-            </a>
-            <a href="{% url "users:signin" %}">
-                <li>Sign-In</li>
-            </a>
-            {% endif%}
-        </ul>
-    </nav>
-</header>
+<div class="flex justify-between w-full items-end mb-10 py-4">
+  <div>
+    <div style="background-image: url('../media/image/logo2.png');width:600px;height:200px;" class="bg-cover bg-center"></div>
+  </div>
+  <header>
+    <div class="font-bold text-xl px-2 flex border-b-2">
+      <a class="ml-2 px-4 py-2 hover:bg-blue-200 rounded-lg" href="{% url 'core:home' %}">Home</a>
+      <a class="ml-2 px-4 py-2 hover:bg-blue-200 rounded-lg" href="{% url 'core:search' %}">Search</a>
+      {% if user.is_authenticated %}
+        <a class="ml-2 px-4 py-2 hover:bg-blue-200 rounded-lg" href="{% url 'users:logout' %}">Log Out</a>
+        <a class="ml-2 px-4 py-2 hover:bg-blue-200 rounded-lg" href="{% url 'users:profile' user.pk %}">My Profile</a>
+      {% else %}
+        <a class="ml-2 px-4 py-2 hover:bg-blue-200 rounded-lg" href="{% url 'users:login' %}">Log In</a>
+        <a class="ml-2 px-4 py-2 hover:bg-blue-200 rounded-lg" href="{% url 'users:signup' %}">Sign Up</a>
+      {% endif %}
+    </div>
+  </header>
+</div>
+<!-- <header class="flex justify-around bg-blue-400 text-white py-4">
+  <a href="{% url 'core:home' %}">Home</a>
+  <a href="{% url 'core:search' %}">Search</a>
+  {% if user.is_authenticated %}
+    <a href="{% url 'users:logout' %}">Log Out</a>
+    <a href="{% url 'users:profile' user.pk %}">My Profile</a>
+  {% else %}
+    <a href="{% url 'users:login' %}">Log In</a>
+    <a href="{% url 'users:signup' %}">Sign Up</a>
+  {% endif %}
+</header> -->

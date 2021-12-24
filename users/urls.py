@@ -1,14 +1,13 @@
 from django.urls import path
-from . import views
+from users.views import logout_view, LoginView, SignUpView, UserProfileView, UpdateProfileView, UpdatePasswordView
 
-app_name = "users"
+app_name = "people"
 
 urlpatterns = [
-    path("login/", views.LoginView.as_view(), name="login"),
-    path("logout/", views.LogoutView.as_view(), name="logout"),
-    path("signin/", views.SignInView.as_view(), name="signin"),
-    path("<int:pk>/profile/", views.ProfileView.as_view(), name="profile"),
-    # path("<int:pk>/update/", views.ProfileView.as_view(), name="profile"),
-    path("update-profile/", views.UpdateProfileView.as_view(), name="updateProfile"),
-    path("update-password/", views.UpdatePasswordView.as_view(), name="updatePassword"),
+    path("logout", logout_view, name="logout"),
+    path("login", LoginView.as_view(), name="login"),
+    path("signup", SignUpView.as_view(), name="signup"),
+    path("<int:pk>", UserProfileView.as_view(), name="profile"),
+    path("update-profile/", UpdateProfileView.as_view(), name="update"),
+    path("update-passwod/", UpdatePasswordView.as_view(), name="password"),
 ]

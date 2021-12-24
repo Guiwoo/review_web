@@ -134,3 +134,6 @@ USE_TZ = True
 STATIC_URL = "/static/"
 # https://docs.djangoproject.com/en/3.2/topics/auth/customizing/ Can find data here
 AUTH_USER_MODEL = "users.User"
+
+MEDIA_ROOT = os.path.join(BASE_DIR, "media")
+MEDIA_URL = "/media/"

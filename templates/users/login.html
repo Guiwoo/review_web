@@ -1,13 +1,10 @@
+
 {% extends "base.html" %}
-{% block page_title %}Log-in{% endblock %}
+
+{% block page_title %}
+  Log In
+{% endblock page_title %}
+
 {% block content %}
-<form method="POST" action="{% url "users:login"%}">
-    {% csrf_token %}
-    <fieldset>
-        <legend>Log-In</legend>
-        {{form.as_p}}
-        <button>Log-In</button>
-    </fieldset>
-</form>
-<p>Don't hvae an Account ? <a href="#">Sign In Here ✈️</a></p>
-{% endblock %}
+    {% include 'mixins/form.html' with form=form cta="Log In" %}
+{% endblock content %}

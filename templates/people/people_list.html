@@ -1,25 +1,32 @@
 {% extends "base.html" %}
 
+{% block page_title %}
+  People
+{% endblock page_title %}
+
 {% block content %}
-<div>
-  <h2>People</h2>
-  {% for person in people %}
-  <div>
-    <a href="{% url "people:peopleDetail" person.pk %}"><h3>{{person.name}}</h3></a>
-    <h5>{{person.kind}}</h5>
+<div class="px-5">
+  <h2 class="ml-1 text-3xl text-blue-600">People</h2>
+  <div class="grid my-5 grid-cols-4 gap-10">
+	{% for person in people %}
+    {% include "mixins/person.html" with person=person %}
+	{% endfor %}
   </div>
-  {% endfor %}
 <hr />
 </div>
-<div>
+<div class="mt-2 flex justify-center">
+  <div>
   {% if page_obj.has_previous %}
-        <a href="?page={{page_obj.previous_page_number}}">Previous</a>
+        <a class="bg-blue-400 hover:bg-blue-600 text-white font-bold py-1 px-2 rounded" href="?page={{page_obj.previous_page_number}}">Previous</a>
     {% endif %}
 
+    <span class="font-bold text-blue-600">
     Page {{page_obj.number}} of {{page_obj.paginator.num_pages}}
+    </span>
 
     {% if page_obj.has_next  %}
-        <a href="?page={{page_obj.next_page_number}}">Next</a>
+        <a class="bg-blue-400 hover:bg-blue-600 text-white font-bold py-1 px-2 rounded" href="?page={{page_obj.next_page_number}}">Next</a>
     {% endif %}
+  </div>
 </div>
 {% endblock content %}
