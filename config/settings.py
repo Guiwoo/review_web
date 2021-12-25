@@ -25,7 +25,8 @@ SECRET_KEY = "3a98^9z!74wec403)&(_yj_wan220*vvooj9$nt#)jnl7vk&^s"
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['review-web.eba-vpsrgaix.ap-northeast-2.elasticbeanstalk.com']
+# ALLOWED_HOSTS = ['review-web.eba-vpsrgaix.ap-northeast-2.elasticbeanstalk.com']
+ALLOWED_HOSTS = []
 
 
 # Application definition
@@ -38,7 +39,7 @@ BASE_APP = [
     "django.contrib.staticfiles",
 ]
 
-THIRD_PARTY_APPS = ["django_seed"]
+THIRD_PARTY_APPS = ["django_seed", "storages"]
 
 PROJECT_APP = [
     "users.apps.UsersConfig",
@@ -137,4 +138,14 @@ STATICFILES_DIRS = [os.path.join(BASE_DIR, "static")]
 AUTH_USER_MODEL = "users.User"
 
 MEDIA_ROOT = os.path.join(BASE_DIR, "media")
-MEDIA_URL = "/media/"
+MEDIA_URL = "static/media/"
+
+DEFAULT_FILE_STORAGE = 'config.custom_storages.UploadStorage'
+STATICFILES_STORAGE = 'config.custom_storages.StaticStorage'
+AWS_ACCESS_KEY_ID = os.environ.get("AWS_ID")
+AWS_SECRET_ACCESS_KEY = os.environ.get("AWS_KEY")
+AWS_STORAGE_BUCKET_NAME = "review-web-guiwoo"
+AWS_DEFAULT_ACL = "public-read"
+
+AWS_S3_CUSTOM_DOMAIN = f"{AWS_STORAGE_BUCKET_NAME}.s3.ap-northeast-2.amazonaws.com"
+STATIC_URL = f"https://{AWS_S3_CUSTOM_DOMAIN}/static/" 
