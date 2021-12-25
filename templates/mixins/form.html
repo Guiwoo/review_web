@@ -1,5 +1,5 @@
 <div class="flex justify-center mt-8">
-<form method="POST" enctype="multipart/form-data" class="bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4">
+<form method="POST" enctype="multipart/form-data" class="shadow-md rounded px-8 pt-6 pb-8 mb-4">
     {% csrf_token %}
     
     {% if form.non_field_errors %}
@@ -17,6 +17,6 @@
       </div>
     {% endfor %}
     
-    <button class="bg-blue-400 hover:bg-blue-600 text-white font-bold mt-2 py-2 px-4 rounded w-full">{{cta}}</button>
+    <button class="bg-red-400 hover:bg-red-600 text-white font-bold mt-2 py-2 px-4 rounded w-full">{{cta}}</button>
 </form>
 </div>

@@ -7,12 +7,37 @@
 
 {% block content %}
 
-    <div>
+  <div class="flex justify-center mt-8 flex-col items-center py-20">
 
-        <h1>{{user_obj.first_name}}</h2>
-
-        <a href="{% url 'users:update' %}">Edit Profile</a>
-
-
+    <div class="border px-20 py-10">
+        <div class="w-40 h-40 bg-gray-700 rounded-full flex justify-center items-center">
+          <span class="text-white text-4xl">{{user_obj.first_name|first}}</span>
+        </div>
+      <div class="mt-8 flex justify-center font-bold text-lg">{{user_obj.bio}}</div>
     </div>
+    <div>
+      <div class="mt-8 flex justify-between">
+        <label class="mr-4 text-sm font-bold">Name:</label>
+        <div class="text-black font-semibold">{{user_obj.first_name}} {{user_obj.last_name}}</div>
+      </div>
+      <div class="mt-2 flex justify-between">
+        <label class="mr-4 text-sm font-bold">Preference:</label>
+        <div class="text-black font-semibold">{{ user_obj.preference|capfirst }}</div>
+      </div>
+      <div class="mt-2 flex justify-between">
+        <label class="mr-4 text-sm font-bold">Language:</label>
+        <div class="text-black font-semibold">{{ user_obj.language|capfirst }}</div>
+      </div>
+      <div class="mt-2 flex justify-between">
+        <label class="mr-4 text-sm font-bold">Favorit Book Genre:</label>
+        <div class="text-black font-semibold">{{user_obj.fav_book_cat}}</div>
+      </div>
+      <div class="mt-2 flex justify-between">
+        <label class="mr-4 text-sm font-bold">Favorit Movie Genre:</label>
+        <div class="text-black font-semibold">{{user_obj.fav_movie_cat}}</div>
+      </div>
+    </div>
+    <a class="mt-8 bg-red-300 px-20 py-4 rounded-xl text-white hover:bg-red-500" href="{% url 'users:update' %}">Edit Profile</a>
+
+  </div>
 {% endblock content %} 

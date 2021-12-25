@@ -1,6 +1,7 @@
 from django.urls import reverse
 from django.db import models
 from core.models import CoreModel
+from . import manager
 
 
 class Movie(CoreModel):
@@ -17,6 +18,7 @@ class Movie(CoreModel):
         "people.Person", on_delete=models.CASCADE, related_name="movies"
     )
     cast = models.ManyToManyField("people.Person", blank=True)
+    objects = manager.GetOrNoneManager()
 
     def __str__(self):
         return self.title
@@ -26,6 +28,12 @@ class Movie(CoreModel):
 
     def all_reviews(self):
         return self.reviews.all()
+
+    def get_first_reviews(self):
+        if self.reviews.count() > 0:
+            (text,) = self.reviews.all()[:1]
+            return text
+        return None
 
     class Meta:
         ordering = ["-created_at"]

@@ -4,6 +4,7 @@
 <head>
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.11.2/css/all.css">
 	<link href="https://unpkg.com/tailwindcss@^1.0/dist/tailwind.min.css" rel="stylesheet">
 	<style>
 		input, select {
@@ -12,15 +13,16 @@
 			padding-right: 0.75rem;
 			padding-top: 0.5rem;
 			padding-bottom: 0.5rem;
+			background-color: transparent;
     }
 	</style>
 	<title>{% block page_title %}{% endblock page_title %} | Nomad Media</title>
 </head>
 
 <body>
-	<div class="bg-contain bg-center min-h-screen" style="background-image: url('../media/image/bg5.png')">
+	<div class="bg-cover bg-center h-min-full" style="background-image: url('https://lh3.googleusercontent.com/k4D1kxmwA08GrK858VmJdJy9Esk_2qKquUEWORY7eYxmbuq3PMpMcPp2RM_iMeAjCC5mNaVIuUTKlUPN0Vfc3PLsjMRga4-jC-8LxC71bnl5q-QUZs1qgIfUAqcZFnKaHMtwSCGW1APLD2iV0khvI7KP-4_aUz-90Uv_VbkeIrEHaMjQxdFl7vVLCb2MTi5imz3yR4VN1uZtB6Ur-vkrg89LriVs8-vH0ZhZ_ZsNmCLchiBUgRufxZbCLWCIMgsFjAAM4xeiqObjNheLPgdhHDUpxtrn8OjNoHuZXHk-ka7vruoBMSfZG07Xp-VrxEcKVvOmSSwz_y91q7ZJleNC8sKILC3XzGvyPynm3ygnPlqp6yNwdUkrG0-97hygMNG0BuU58xTUThvOsa5XyLGYkYC1DfGVG-gULQ-LXi-xygtSF-5i3C8dx7l_8PERMIXF9FSlReIoQwgN-WUxO5aDyiNvX-YGqcZ71XyiEI7fkDnlDkHVvsQcSKwMnO2BMoCwXYHQAPEaGAwd6G3uQ9rIH9vYQ0_Dp1-Tyl8r8LIeySY80fWWSgI9bGxpYKD1ok0sjJfj6J2eCmQ3F9obCXw8O43m_xl7AbeM4FvfFHpIEfh6i0Yz86_8NY5c0oSk6fyXoeiQGJ1bKRaTwgdjjZtBzvhSSIiSih8LurQyh_a913iDuUQ8gra7pyRGddMaQhOKQ1de-Vjuva2j2-JrT5iSnre_=w1440-h810-no?authuser=0')">
 		<div class="contianer mx-auto px-20 py-20">
-		  <div class="border border-2 border-solid px-10 py-10 border-white bg-center bg-cotain w-full">
+		  <div class="shadow-inner shadow-xl border border-b-2 border-r-2 border-l-2 border-t-2 border-solid px-10 py-10 border-white bg-center bg-cotain w-full">
 			{% include 'partials/header.html' %} 
 			{% block content %} {% endblock content %} 
 		  </div>

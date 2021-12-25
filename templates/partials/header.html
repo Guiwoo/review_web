@@ -1,29 +1,18 @@
-<div class="flex justify-between w-full items-end mb-10 py-4">
+<div class="flex justify-between w-full items-end mb-10 py-4 z-10">
   <div>
-    <div style="background-image: url('../media/image/logo2.png');width:600px;height:200px;" class="bg-cover bg-center"></div>
+    <div style="background-image: url('https://lh3.googleusercontent.com/EyyI-v6hJUSkU363MgQqcrruSr-rlSvhGh1Nn37JDU_A4BY_jp5YymFFc_GpeYMIWLzOCVsIc8zo9oER4S652p0GlHdCzkqI-9Y0R_Oh_3NbTXaFnOqNVu_qyjAVNPEzU-XUbCuVdB1BWakXCkRsWGwjGreP6wCtmL48uVQeu5i8Lw1-GHORZeyjRuVQjf2eu_VW1fZmrEUyujjC1yx7CJQ1BhoKfutAsJUmh7IHnLDE6i-CyVCrYTKHhxtVOBIDsPJtzt5i6yK2zlipi8fdac89k0i99to9-zTk6FADWRfU6YZVnDIiLC7eMDHfNWhNHX2bdVMBHQHxHY_-koRYooQRYUNflm64-7E9Lng6Dj6jLra5Kw7mIGvj3kwF8eRsfbPPM6cKg2oARjz1xdBz7ntv8xzMjIXRwicKVI4nygQ0Y6-WPBhoFF2nMgPDUA9Sn1js4TogzZdfRfdaVUlkzp9WhNopF2uKsjto6aPqi70EkQMVFz-sIhzBCtPhCysmoR-KQsge-Ocqp2__AKq7vp9w-_-Yb7EWSC_55CuZmTm-23aI0w1Vs5cGBHvnVv7Gb0ru6JPGBj8LzbqY_cMu6seRDlEV0mAc5m0JvMIQl2XC_hDkgZhNfeG7V5QGfTt3LavWUFrk_6UMVQu-g6g9grxQYz76AVkesjj66J9eY89Ds4qqgAwVnnHCoXpPdjMafmGIGajbgmczl4P6DLFtC7ro=w340-h172-no?authuser=0');width:400px;height:100px;" class="bg-cover bg-center"></div>
   </div>
   <header>
     <div class="font-bold text-xl px-2 flex border-b-2">
-      <a class="ml-2 px-4 py-2 hover:bg-blue-200 rounded-lg" href="{% url 'core:home' %}">Home</a>
-      <a class="ml-2 px-4 py-2 hover:bg-blue-200 rounded-lg" href="{% url 'core:search' %}">Search</a>
+      <a class="ml-2 px-4 py-2 hover:bg-red-400 hover:text-white rounded-lg" href="{% url 'core:home' %}">Home</a>
+      <a class="ml-2 px-4 py-2 hover:bg-red-400 hover:text-white rounded-lg" href="{% url 'core:search' %}">Search</a>
       {% if user.is_authenticated %}
-        <a class="ml-2 px-4 py-2 hover:bg-blue-200 rounded-lg" href="{% url 'users:logout' %}">Log Out</a>
-        <a class="ml-2 px-4 py-2 hover:bg-blue-200 rounded-lg" href="{% url 'users:profile' user.pk %}">My Profile</a>
+        <a class="ml-2 px-4 py-2 hover:bg-red-400 hover:text-white rounded-lg" href="{% url 'users:logout' %}">Log Out</a>
+        <a class="ml-2 px-4 py-2 hover:bg-red-400 hover:text-white rounded-lg" href="{% url 'users:profile' user.pk %}">My Profile</a>
       {% else %}
-        <a class="ml-2 px-4 py-2 hover:bg-blue-200 rounded-lg" href="{% url 'users:login' %}">Log In</a>
-        <a class="ml-2 px-4 py-2 hover:bg-blue-200 rounded-lg" href="{% url 'users:signup' %}">Sign Up</a>
+        <a class="ml-2 px-4 py-2 hover:bg-red-400 hover:text-white rounded-lg" href="{% url 'users:login' %}">Log In</a>
+        <a class="ml-2 px-4 py-2 hover:bg-red-400 hover:text-white rounded-lg" href="{% url 'users:signup' %}">Sign Up</a>
       {% endif %}
     </div>
   </header>
 </div>
-<!-- <header class="flex justify-around bg-blue-400 text-white py-4">
-  <a href="{% url 'core:home' %}">Home</a>
-  <a href="{% url 'core:search' %}">Search</a>
-  {% if user.is_authenticated %}
-    <a href="{% url 'users:logout' %}">Log Out</a>
-    <a href="{% url 'users:profile' user.pk %}">My Profile</a>
-  {% else %}
-    <a href="{% url 'users:login' %}">Log In</a>
-    <a href="{% url 'users:signup' %}">Sign Up</a>
-  {% endif %}
-</header> -->

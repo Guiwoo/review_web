@@ -6,10 +6,46 @@
 
 {% block content %}
 
-<div class="flex flex-col items-center bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4">
-<h2 class="font-bold mb-2">{{person.name}}</h2>
-<div class="inline-block bg-gray-200 rounded-full px-3 py-1 text-sm font-semibold text-gray-700">{{person.kind}}</div>
-<a class="bg-blue-400 hover:bg-blue-600 text-white font-bold mt-4 py-2 px-4 rounded" href="{% url 'people:update' person.pk %}">Edit Person</a>
+<div class="py-64 flex justify-center itmes-center bg-cover rounded-2xl z-10 relative">
+  <div class="bg-red-600 absolute w-full h-full top-0 left-0 bg-cover rounded opacity-50" style="background-image:url({{person.photo.url}});"></div>
+  <div class="shadow-md rounded px-8 pt-6 pb-8 mb-4 border w-1/2 z-20">
+    <div class="flex flex-col items-center">
+      <div class="h-64 w-64 bg-auto bg-center" style="background-image:url({{person.photo.url}})" ></div>
+      <h2 class="font-bold mt-8 text-lg">{{person.name}}</h2>
+      <div class="flex items-center my-2 justify-between">
+        <div class="bg-orange-400 text-white px-3 shadow-md py-1 rounded-full mx-4">{{person.kind}}</div>
+      </div>
+    </div>
+    <div class="border px-4 py-4 border-b-4 border-t-4">
+      <div class="text-white font-bold bg-red-200 text-xl text-center rounded">Carrer</div>
+      <div class="grid grid-cols-2 gap-2">
+        {% if person.kind == "writer" %}
+          {% for b in person.get_book %}
+            {% include "mixins/book.html" with book=b %}
+          {% endfor %}
+        {% else %}
+          {% for m in person.get_movie %}
+            {% include "mixins/movie.html" with movie=m %}
+          {% endfor %}
+        {% endif %}
+      </div>
+    </div>
+
+    <div class="w-full flex justify-between mt-10">
+      <div>
+        <a class=" bg-red-400 hover:bg-red-600 text-white font-bold rounded p-2" href="{% url 'people:update' person.pk %}">
+          <i class="fas fa-edit"></i>
+          <span>Edit Person</span>
+        </a>
+      </div>
+  
+      <div>
+        {% if user.is_authenticated %}
+          {% include "mixins/fav_button.html" with obj=person kind='person' %}
+        {% endif %}
+      </div>
+    </div>
+  </div>
 </div>
 
 {% endblock content %}

@@ -6,11 +6,10 @@
 {% endblock page_title %}
 
 {% block content %}
-
     <div>
       {% include 'mixins/form.html' with form=form cta="Update Profile" %}
     </div>
-    <div>
-        <a href="{% url 'users:password' %}">Change Password</a>
+    <div class="flex justify-center">
+        <a class="font-semibold" href="{% url 'users:password' %}">Change Password 🚀</a>
     </div>
 {% endblock content %}

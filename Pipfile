@@ -11,6 +11,7 @@ psycopg2-binary = "*"
 
 [dev-packages]
 flake8 = "*"
+awsebcli = "*"
 
 [requires]
 python_version = "3.9"

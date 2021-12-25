@@ -12,6 +12,9 @@ class CreateReviewForm(forms.ModelForm):
             "book",
             "rating",
         )
+        widgets = {
+            "text": forms.Textarea(attrs={"class": "w-full bg-transparent h-32"})
+        }
 
     def __init__(self, *args, **kwargs):
         self.user = kwargs.pop("user")

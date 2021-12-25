@@ -69,7 +69,6 @@ class UpdateProfileView(UpdateView):
         return self.request.user
 
 
-
 class UpdatePasswordView(PasswordChangeView):
 
     template_name = "users/update_password.html"

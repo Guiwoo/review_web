@@ -3,6 +3,16 @@ from django.db import models
 from core.models import CoreModel
 
 
+class GetOrNoneManager(models.Manager):
+    """Adds get_or_none method to objects"""
+
+    def get_or_none(self, **kwargs):
+        try:
+            return self.get(**kwargs)
+        except self.model.DoesNotExist:
+            return None
+
+
 class Book(CoreModel):
 
     """Book Model"""
@@ -17,6 +27,7 @@ class Book(CoreModel):
     writer = models.ForeignKey(
         "people.Person", on_delete=models.CASCADE, related_name="books"
     )
+    objects = GetOrNoneManager()
 
     def __str__(self):
         return self.title
@@ -26,6 +37,10 @@ class Book(CoreModel):
 
     def all_reviews(self):
         return self.reviews.all()
+
+    def get_first_reviews(self):
+        (text,) = self.reviews.all()[:1]
+        return text
 
     class Meta:
         ordering = ["-created_at"]
