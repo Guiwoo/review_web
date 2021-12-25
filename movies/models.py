@@ -10,7 +10,7 @@ class Movie(CoreModel):
     title = models.CharField(max_length=120)
     year = models.IntegerField()
     cover_image = models.ImageField(null=True, blank=True)
-    rating = models.IntegerField()
+    rating = models.IntegerField(choices=[(i, i) for i in range(1, 11)])
     category = models.ForeignKey(
         "categories.Category", on_delete=models.CASCADE, related_name="movies"
     )

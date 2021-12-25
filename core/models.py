@@ -1,6 +1,5 @@
 from django.db import models
 
-
 class CoreModel(models.Model):
 
     """Core Model"""

@@ -25,7 +25,7 @@ class Review(CoreModel):
         null=True,
         blank=True,
     )
-    rating = models.IntegerField()
+    rating = models.IntegerField(choices=[(i, i) for i in range(1, 11)])
 
     def __str__(self):
         return self.text
