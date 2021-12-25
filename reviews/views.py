@@ -4,6 +4,7 @@ from django.urls import reverse
 from django.shortcuts import redirect
 from django.contrib.auth.decorators import login_required
 from . import models as ReviewModel, forms
+from users import mixins as user_mixins
 
 
 class ReviewList(ListView):
@@ -30,7 +31,7 @@ def delete_photo(request, pk):
         return redirect(reverse("core:home"))
 
 
-class CreateReview(CreateView):
+class CreateReview(user_mixins.LoggedInOnlyView, CreateView):
     model = ReviewModel.Review
     form_class = forms.CreateReviewForm
     template_name = "reviews/create.html"

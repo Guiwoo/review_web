@@ -43,11 +43,11 @@
           <span>See Reviews</span>
         </a>
       </div>
+      {% if user.is_authenticated %}
       <div>
-        {% if user.is_authenticated %}
           {% include "mixins/fav_button.html" with obj=book kind='book' %}
+        </div>
         {% endif %}
-      </div>
     </div>
   </div>
 </div>

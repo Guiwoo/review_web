@@ -7,9 +7,11 @@
 {% block content %}
 <div class="px-5">
   <h2 class="ml-1 text-3xl text-blue-600">Review</h2>
+  {% if user.is_authenticated %}
   <div class="text-right">
     <a class="bg-red-300 px-3 py-2 rounded font-semibold text-white hover:bg-red-500" href="{% url "reviews:create" %}"><i class="fas fa-feather"></i> Add Review!</a>
   </div>
+  {% endif %}
   <div class="my-5">
 	{% for r in reviews %}
         <div class="border border-red-200 border-b-2 border-t-2 border-l-2 border-r-2 py-4 px-20 my-3">

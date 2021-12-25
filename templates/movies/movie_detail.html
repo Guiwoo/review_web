@@ -49,11 +49,11 @@
           <span>See Reviews</span>
         </a>
       </div>
+      {% if user.is_authenticated %}
       <div>
-        {% if user.is_authenticated %}
           {% include "mixins/fav_button.html" with obj=movie kind='movie' %}
-        {% endif %}
-      </div>
+        </div>
+      {% endif %}
     </div>
   </div>
 </div>

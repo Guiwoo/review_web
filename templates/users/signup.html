@@ -5,5 +5,7 @@
 {% endblock page_title %}
 
 {% block content %}
-    {% include 'mixins/form.html' with form=form cta="Sign Up" %}
+    <div class="py-24">
+      {% include 'mixins/form.html' with form=form cta="Sign Up" %}
+    </div>
 {% endblock content %}

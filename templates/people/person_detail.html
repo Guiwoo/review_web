@@ -39,11 +39,11 @@
         </a>
       </div>
   
+      {% if user.is_authenticated %}
       <div>
-        {% if user.is_authenticated %}
           {% include "mixins/fav_button.html" with obj=person kind='person' %}
+        </div>
         {% endif %}
-      </div>
     </div>
   </div>
 </div>
