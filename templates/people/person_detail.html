@@ -19,17 +19,18 @@
     <div class="border px-4 py-4 border-b-4 border-t-4">
       <div class="text-white font-bold bg-red-200 text-xl text-center rounded">Carrer</div>
       <div class="grid grid-cols-2 gap-2">
-        {% if person.get_book.all > 0 %}
+        {% if person.get_book.count > 0 %}
           {% for b in person.get_book %}
             {% include "mixins/book.html" with book=b %}
           {% endfor %}
-        {% elif person.get_movie.all > 0 %}
+        {% elif person.get_movie.count > 0 %}
           {% for m in person.get_movie %}
             {% include "mixins/movie.html" with movie=m %}
           {% endfor %}
+          {% else %}
+        </div>
+        <h1 class="py-6 text-white font-bold text-center text-xl">Looking for released Book or Movie</h1>
         {% endif %}
-      </div>
-      <h1 class="py-6 text-white font-bold text-center text-xl">Looking for released Book or Movie</h1>
     </div>
 
     <div class="w-full flex justify-between mt-10">
