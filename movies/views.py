@@ -31,7 +31,7 @@ class CreateMovie(CreateView):
         movie = form.save()
         movie.save()
         form.save_m2m()
-        return redirect(reverse("movies:movieDetail", kwargs={"pk": movie.pk}))
+        return redirect(reverse("movies:movie", kwargs={"pk": movie.pk}))
 
 
 class UpdateMovie(UpdateView):

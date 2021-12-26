@@ -47,7 +47,7 @@
                     {% include "mixins/book.html" with book=r.book %}
                   {% endif %}
                 </div>
-                <h5 class="text-gray-600 text-lg">{{r.text}}</h5>
+                <h5 class="py-4 text-xl text-lg font-semibold">{{r.text}}</h5>
             </div>
             {% if user == r.created_by %}
             <div class="flex justify-end">
