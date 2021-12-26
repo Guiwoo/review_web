@@ -5,7 +5,7 @@
 {% endblock page_title %}
 
 {% block content %}
-<div class="my-6 px-5">
+<div class="my-4 px-5">
   <div class="flex items-center">
 	<h2 class="text-3xl text-pink-500">Movies</h2> 
   <a class="bg-red-400 hover:bg-red-600 text-white font-bold ml-2 py-2 px-4 rounded" href="{% url 'movies:create' %}">create</a>
@@ -21,7 +21,7 @@
 </div>
 	<hr />
 
-<div class="my-8 px-5">
+<div class="my-4 px-5">
   <div class="flex items-center">
   <h2 class="text-3xl text-pink-500">Books</h2>
   <a class="bg-red-400 hover:bg-red-600 text-white font-bold ml-2 py-2 px-4 rounded" href="{% url 'books:create' %}">create</a>
@@ -37,19 +37,18 @@
 </div>
 	<hr />
 
-<div class="my-8 px-5">
-  <div class="flex items-center">
-	<h2 class="text-3xl text-pink-500">People</h2> 
-  <a class="bg-red-400 hover:bg-red-600 text-white font-bold ml-2 py-2 px-4 rounded" href="{% url 'people:create' %}">create</a>
+<div class="my-4 px-5">
+  <div class="flex items-center my-4">
+    <h2 class="text-3xl text-pink-500">People</h2> 
+    <a class="bg-red-400 hover:bg-red-600 text-white font-bold ml-2 py-2 px-4 rounded" href="{% url 'people:create' %}">create</a>
   </div>
   <div class="grid grid-cols-4 gap-10">
 	{% for person in people %}
 	  {% include "mixins/person.html" with person=person %}
 	{% endfor %}
   <div class=" rounded shadow-lg p-2">
-	<a class="text-red-400 font-bold" href="{% url 'people:people' %}">See all people &rarr;</a>
+	  <a class="text-red-400 font-bold" href="{% url 'people:people' %}">See all people &rarr;</a>
   </div>
   </div>
 </div>
-	<hr />
 {% endblock content %}
