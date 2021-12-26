@@ -5,9 +5,9 @@
 {% endblock page_title %}
 
 {% block content %}
-<div class="py-48 flex justify-center itmes-center bg-cover rounded-2xl z-10 relative">
-  <div class="bg-red-600 absolute w-full h-full top-0 left-0 bg-cover rounded opacity-50" style="background-image:url({{movie.cover_image.url}});"></div>
-  <div class="flex flex-col items-center shadow-md rounded px-8 pt-6 pb-8 mb-4 border w-1/2 z-20">
+<div class="py-48 flex justify-center itmes-center rounded-2xl z-10 relative">
+  <div class="bg-red-600 absolute w-full h-full top-0 left-0 bg-cover rounded-xl opacity-50" style="background-image:url({{movie.cover_image.url}});"></div>
+  <div class="flex flex-col items-center shadow-md rounded-xl px-8 pt-6 pb-8 mb-4 border w-1/2 z-20">
     <div class="h-64 w-64 bg-cover bg-center" style="background-image:url({{movie.cover_image.url}})" ></div>
     <h2 class="font-bold mt-8 text-lg">{{movie.title}}</h2>
     <div class="flex items-center my-2 justify-between">
